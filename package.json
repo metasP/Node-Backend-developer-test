@@ -1,0 +1,22 @@
+{
+  "name": "Node-Backend-developer-test",
+  "version": "0.0.0",
+  "description": "Node Backend developer test for GetLinks",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://metasP@github.com/metasP/Node-Backend-developer-test.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/metasP/Node-Backend-developer-test/issues"
+  },
+  "homepage": "https://github.com/metasP/Node-Backend-developer-test",
+  "dependencies": {
+    "restify": "^4.1.1"
+  }
+}
