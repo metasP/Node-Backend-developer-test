@@ -1,6 +1,6 @@
 function MembersController(){
     var that = this;
-    that.memberList = [];
+    that.memberList = [{email: 'admin', password: 'admin'}];
 
     var findMembersByEmail = function(email){
         var found = that.memberList.filter(function(m){
