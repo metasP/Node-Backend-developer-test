@@ -13,7 +13,7 @@ server.use(function(req, res, next){
 
 server.use(restify.bodyParser());
 
-server.get('api/members', members.get);
+server.get('api/members', members.get); // for debug
 server.post('api/members/register', members.register);
 server.post('api/members/login', members.login);
 
