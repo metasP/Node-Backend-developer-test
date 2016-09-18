@@ -1,15 +1,25 @@
 function MembersController(){
     var that = this;
-    that.memberList = [{email: 'admin', password: 'admin'}];
+    that.memberList = [{email: 'admin@email.com', password: 'password'}];
 
-    var findMembersByEmail = function(email){
+    that.findMembersByEmail = function(email){
         var found = that.memberList.filter(function(m){
-            return m.email = email;
+            return m.email == email;
         });
         if(found && found.length > 0){
           return found[0];
         }
         return null;
+    };
+
+    // return true if success
+    that.validateMember = function(email, password){
+      var found = that.findMembersByEmail(email);
+      if(found && found.password == password){
+        return true;
+      }else{  // error
+        return false;
+      }
     };
 
     that.get = function(req, res, next){
@@ -21,7 +31,7 @@ function MembersController(){
         if(!req.body || !req.body.hasOwnProperty('email') || !req.body.hasOwnProperty('password')){
           res.send(500);
         }else{
-          var found = findMembersByEmail(req.body.email);
+          var found = that.findMembersByEmail(req.body.email);
           if(found){ // error
             res.send(400, "This email '" + req.body.email + "' is already used.");
           }else{
@@ -30,7 +40,7 @@ function MembersController(){
               password: req.body.password
             };
             that.memberList.push(newMember);
-            res.send(201, newMember);
+            res.send(201, 'email: '+req.body.email+' Register success');
           }
         }
         return next();
@@ -40,8 +50,8 @@ function MembersController(){
         if(!req.body || !req.body.hasOwnProperty('email') || !req.body.hasOwnProperty('password')){
           res.send(400);
         }else{
-          var found = findMembersByEmail(req.body.email);
-          if(found && found.password == req.body.password){
+          var isValidMember = that.validateMember(req.body.email, req.body.password);
+          if(isValidMember){
             res.send(200, "Login success.");
           }else{  // error
             res.send(401, "Incorrect email and/or password.");
